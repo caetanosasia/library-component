@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { VirtualizedListProps } from '../../types/libraryTypes';
 
 const VirtualizedList = <T,>({ 
@@ -18,6 +18,13 @@ const VirtualizedList = <T,>({
 
   const visibleItems = items.slice(startIndex, endIndex + 1);
 
+ const onScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+  const scrollValue = e.currentTarget.scrollTop;
+  requestAnimationFrame(() => {
+    setScrollTop(scrollValue);
+  });
+}, []);
+
   return (
     <div 
       style={{ 
@@ -25,7 +32,7 @@ const VirtualizedList = <T,>({
         overflowY: 'auto',
         position: 'relative'
       }}
-      onScroll={e => setScrollTop(e.currentTarget.scrollTop)}
+      onScroll={onScroll}
     >
       <div style={{ height: `${innerHeight}px` }}>
         <div style={{
@@ -34,7 +41,7 @@ const VirtualizedList = <T,>({
           width: '100%'
         }}>
           {visibleItems.map((item, index) => (
-            <div key={index} style={{ height: `${itemHeight}px` }}>
+            <div key={(item as any).Name || index} style={{ height: `${itemHeight}px` }}>
               {renderItem(item)}
             </div>
           ))}

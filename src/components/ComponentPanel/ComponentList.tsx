@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from '../../types/libraryTypes';
+import { ComponentItem } from './ComponentItem';
 import VirtualizedList from './VirtualizedList';
 
 interface ComponentListProps {
@@ -13,11 +14,7 @@ const ComponentList: React.FC<ComponentListProps> = ({ components }) => {
         <VirtualizedList
           items={components}
           itemHeight={30}
-          renderItem={(comp: Component) => (
-            <div style={{ padding: '8px', borderBottom: '1px solid #eee' }}>
-              {comp.Name}
-            </div>
-          )}
+          renderItem={(comp: Component) => <ComponentItem comp={comp} />}
         />
       </div>
     );
