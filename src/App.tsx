@@ -1,26 +1,84 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useMemo, useCallback } from 'react';
+import { Library } from './data/libraryData';
+import { LibraryData } from './types/libraryTypes';
+import CategoryPanel from './components/CategoryPanel/CategoryPanel';
 
-function App() {
+const LibraryComponent: React.FC<{ initialData: LibraryData }> = ({ initialData }) => {
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const { filteredComponents, categoriesWithCounts } = useMemo(() => {
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    
+    const filtered = searchTerm
+      ? initialData.Components.filter(comp => 
+          comp.Name.toLowerCase().includes(lowerSearchTerm)
+        )
+      : initialData.Components;
+
+    const categoryTotalCounts = new Map<string, number>();
+    const categoryFilteredCounts = new Map<string, number>();
+    
+    initialData.Categories.forEach(cat => {
+      categoryTotalCounts.set(cat, 0);
+      categoryFilteredCounts.set(cat, 0);
+    });
+
+    initialData.Components.forEach(comp => {
+      comp.Categories.forEach(cat => {
+        if (categoryTotalCounts.has(cat)) {
+          categoryTotalCounts.set(cat, (categoryTotalCounts.get(cat) || 0) + 1);
+        }
+      });
+    });
+
+    filtered.forEach(comp => {
+      comp.Categories.forEach(cat => {
+        if (categoryFilteredCounts.has(cat)) {
+          categoryFilteredCounts.set(cat, (categoryFilteredCounts.get(cat) || 0) + 1);
+        }
+      });
+    });
+
+    const visibleCategories = searchTerm
+      ? initialData.Categories.filter(cat => (categoryFilteredCounts.get(cat) || 0 > 0))
+      : initialData.Categories;
+
+    return {
+      filteredComponents: filtered,
+      categoriesWithCounts: visibleCategories.map(cat => ({
+        name: cat,
+        totalCount: categoryTotalCounts.get(cat) || 0,
+        filteredCount: categoryFilteredCounts.get(cat) || 0
+      }))
+    };
+  }, [initialData, searchTerm]);
+
+  const handleCategorySelect = useCallback((category: string) => {
+    setSelectedCategory(category);
+  }, []);
+
+  const handleSearchChange = useCallback((term: string) => {
+    setSearchTerm(term);
+    if (selectedCategory && !categoriesWithCounts.some(c => c.name === selectedCategory)) {
+      setSelectedCategory(null);
+    }
+  }, [selectedCategory, categoriesWithCounts]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <CategoryPanel
+        categories={categoriesWithCounts}
+        selectedCategory={selectedCategory}
+        onCategorySelect={handleCategorySelect}
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange}
+      />
     </div>
   );
-}
+};
 
-export default App;
+export default function App() {
+  return <LibraryComponent initialData={Library} />;
+}
