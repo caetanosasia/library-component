@@ -14,6 +14,11 @@ export interface LibraryData {
   Categories: string[];
 }
 
+export interface VirtualizedListProps<T> {
+  items: T[];
+  itemHeight: number;
+  renderItem: (item: T) => React.ReactNode;
+}
 
 export interface CategoryItemProps {
   category: CategoryCount;
@@ -29,3 +34,7 @@ export interface CategoryPanelProps {
   onSearchChange: (term: string) => void;
 }
 
+export interface ComponentPanelProps {
+  selectedCategory: string | null;
+  components: Component[];
+}

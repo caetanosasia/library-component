@@ -2,6 +2,7 @@ import React, { useState, useMemo, useCallback } from 'react';
 import { Library } from './data/libraryData';
 import { LibraryData } from './types/libraryTypes';
 import CategoryPanel from './components/CategoryPanel/CategoryPanel';
+import ComponentPanel from './components/ComponentPanel/ComponentPanel';
 
 const LibraryComponent: React.FC<{ initialData: LibraryData }> = ({ initialData }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -65,6 +66,12 @@ const LibraryComponent: React.FC<{ initialData: LibraryData }> = ({ initialData 
     }
   }, [selectedCategory, categoriesWithCounts]);
 
+  const categoryComponents = useMemo(() => {
+    if (!selectedCategory) return [];
+    return filteredComponents.filter(comp =>
+      comp.Categories.includes(selectedCategory)
+    );
+  }, [filteredComponents, selectedCategory]);
 
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
@@ -74,6 +81,10 @@ const LibraryComponent: React.FC<{ initialData: LibraryData }> = ({ initialData 
         onCategorySelect={handleCategorySelect}
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
+      />
+      <ComponentPanel
+        selectedCategory={selectedCategory}
+        components={categoryComponents}
       />
     </div>
   );
