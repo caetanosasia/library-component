@@ -22,7 +22,6 @@ export const Library: LibraryData = {
     { Name: "Bar Chart", Categories: ["Charts"] },
     { Name: "Line Chart", Categories: ["Charts"] },
     { Name: "Button", Categories: ["Controls"] },
-    { Name: "Button", Categories: ["Controls"] },
     { Name: "Input Field", Categories: ["Controls", "Inputs"] },
     { Name: "Checkbox", Categories: ["Controls", "Inputs"] },
     { Name: "Radio Button", Categories: ["Controls", "Inputs"] },
@@ -30,4 +29,4 @@ export const Library: LibraryData = {
   Categories: ["Controls", "Inputs", "Layout", "Custom", "Charts"],
 };
 
-addBigData(30, 50000);
+addBigData(30, 10000);

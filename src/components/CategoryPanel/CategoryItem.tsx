@@ -10,14 +10,13 @@ const CategoryItem: React.FC<CategoryItemProps> = React.memo(({
     style={{
       padding: '8px',
       cursor: 'pointer',
-      backgroundColor: isSelected ? '#eee' : 'transparent',
+      backgroundColor: isSelected ? '#6b95e9' : 'transparent',
       display: 'flex',
-      justifyContent: 'space-between'
     }}
     onClick={() => onSelect(category.name)}
   >
     <span>{category.name}</span>
-    <span>({category.filteredCount})</span>
+    <span style={{marginLeft: '5px'}}>({category.filteredCount})</span>
   </li>
 ));
 

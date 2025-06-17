@@ -3,6 +3,8 @@ import { Library } from './data/libraryData';
 import { LibraryData } from './types/libraryTypes';
 import CategoryPanel from './components/CategoryPanel/CategoryPanel';
 import ComponentPanel from './components/ComponentPanel/ComponentPanel';
+import SearchInput from './components/SearchInput/SearchInput';
+
 
 const LibraryComponent: React.FC<{ initialData: LibraryData }> = ({ initialData }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -70,18 +72,24 @@ const LibraryComponent: React.FC<{ initialData: LibraryData }> = ({ initialData 
   }, [filteredComponents, selectedCategory]);
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      <CategoryPanel
-        categories={categoriesWithCounts}
-        selectedCategory={selectedCategory}
-        onCategorySelect={handleCategorySelect}
-        searchTerm={searchTerm}
-        onSearchChange={handleSearchChange}
-      />
-      <ComponentPanel
-        selectedCategory={selectedCategory}
-        components={categoryComponents}
-      />
+    <div style={{ padding: '16px', fontFamily: 'Arial, sans-serif', boxSizing: 'border-box' }}>
+      <h1>Library</h1>
+      <SearchInput 
+        value={searchTerm}
+        onChange={handleSearchChange}
+        placeholder="Search"
+        />
+      <div style={{ display: 'flex' }}>
+        <CategoryPanel
+          categories={categoriesWithCounts}
+          selectedCategory={selectedCategory}
+          onCategorySelect={handleCategorySelect}
+          />
+        <ComponentPanel
+          selectedCategory={selectedCategory}
+          components={categoryComponents}
+          />
+      </div>
     </div>
   );
 };

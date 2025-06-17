@@ -30,8 +30,6 @@ export interface CategoryPanelProps {
   categories: CategoryCount[];
   selectedCategory: string | null;
   onCategorySelect: (category: string) => void;
-  searchTerm: string;
-  onSearchChange: (term: string) => void;
 }
 
 export interface ComponentPanelProps {

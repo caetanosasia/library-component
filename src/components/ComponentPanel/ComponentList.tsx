@@ -21,13 +21,13 @@ const ComponentList: React.FC<ComponentListProps> = ({ components }) => {
   }
   
   return (
-    <ul style={{ listStyle: 'none', padding: 0 }}>
+    <div style={{ listStyle: 'none', padding: 0, display: 'flex', flexWrap: 'wrap' }}>
       {components.map(comp => (
-        <li key={comp.Name} style={{ padding: '8px', borderBottom: '1px solid #eee' }}>
+        <div key={comp.Name} style={{ padding: '8px', border: '1px solid #c4c4c4', margin: '0 4px 4px 0', minWidth: '75px' }}>
           {comp.Name}
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 
