@@ -2,10 +2,7 @@ import { FC } from 'react';
 import { ComponentPanelProps } from '../../types/libraryTypes';
 import ComponentList from './ComponentList/ComponentList';
 
-const ComponentPanel: FC<ComponentPanelProps> = ({
-  selectedCategory,
-  components
-}) => {
+const ComponentPanel: FC<ComponentPanelProps> = ({ selectedCategory, components }) => {
   return (
     <div style={{ flex: 1, padding: '16px' }}>
       <h2>

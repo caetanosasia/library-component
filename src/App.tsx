@@ -5,7 +5,6 @@ import CategoryPanel from './components/CategoryPanel/CategoryPanel';
 import ComponentPanel from './components/ComponentPanel/ComponentPanel';
 import SearchInput from './components/SearchInput/SearchInput';
 
-
 const LibraryComponent: FC<{ initialData: LibraryData }> = ({ initialData }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -14,9 +13,7 @@ const LibraryComponent: FC<{ initialData: LibraryData }> = ({ initialData }) => 
     const lowerSearchTerm = searchTerm.toLowerCase();
 
     const filtered = searchTerm
-      ? initialData.Components.filter(comp =>
-          comp.Name.toLowerCase().includes(lowerSearchTerm)
-        )
+      ? initialData.Components.filter(comp => comp.Name.toLowerCase().includes(lowerSearchTerm))
       : initialData.Components;
 
     const categoryTotalCounts = new Map<string, number>();
@@ -48,8 +45,8 @@ const LibraryComponent: FC<{ initialData: LibraryData }> = ({ initialData }) => 
       categoriesWithCounts: visibleCategories.map(cat => ({
         name: cat,
         totalCount: categoryTotalCounts.get(cat) || 0,
-        filteredCount: categoryFilteredCounts.get(cat) || 0
-      }))
+        filteredCount: categoryFilteredCounts.get(cat) || 0,
+      })),
     };
   }, [initialData, searchTerm]);
 
@@ -57,38 +54,37 @@ const LibraryComponent: FC<{ initialData: LibraryData }> = ({ initialData }) => 
     setSelectedCategory(category);
   }, []);
 
-  const handleSearchChange = useCallback((term: string) => {
-    setSearchTerm(term);
-    setSelectedCategory(prev =>
-      categoriesWithCounts.some(c => c.name === prev) ? prev : null
-    );
-  }, [categoriesWithCounts]);
+  const handleSearchChange = useCallback(
+    (term: string) => {
+      setSearchTerm(term);
+      setSelectedCategory(prev => (categoriesWithCounts.some(c => c.name === prev) ? prev : null));
+    },
+    [categoriesWithCounts]
+  );
 
   const categoryComponents = useMemo(() => {
     if (!selectedCategory) return [];
-    return filteredComponents.filter(comp =>
-      comp.Categories.includes(selectedCategory)
-    );
+    return filteredComponents.filter(comp => comp.Categories.includes(selectedCategory));
   }, [filteredComponents, selectedCategory]);
 
   return (
-    <div style={{ padding: '16px', fontFamily: 'Arial, sans-serif', boxSizing: 'border-box', height: '100vh' }}>
+    <div
+      style={{
+        padding: '16px',
+        fontFamily: 'Arial, sans-serif',
+        boxSizing: 'border-box',
+        height: '100vh',
+      }}
+    >
       <h1>Library</h1>
-      <SearchInput 
-        value={searchTerm}
-        onChange={handleSearchChange}
-        placeholder="Search"
-        />
+      <SearchInput value={searchTerm} onChange={handleSearchChange} placeholder="Search" />
       <div style={{ display: 'flex' }}>
         <CategoryPanel
           categories={categoriesWithCounts}
           selectedCategory={selectedCategory}
           onCategorySelect={handleCategorySelect}
-          />
-        <ComponentPanel
-          selectedCategory={selectedCategory}
-          components={categoryComponents}
-          />
+        />
+        <ComponentPanel selectedCategory={selectedCategory} components={categoryComponents} />
       </div>
     </div>
   );

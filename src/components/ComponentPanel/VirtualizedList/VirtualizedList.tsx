@@ -2,11 +2,11 @@ import React, { useState, useRef, useCallback, useLayoutEffect } from 'react';
 import { VirtualizedListProps } from '../../../types/libraryTypes';
 import styles from './VirtualizedList.module.css';
 
-const VirtualizedList = <T,>({ 
-  items, 
-  itemHeight, 
+const VirtualizedList = <T,>({
+  items,
+  itemHeight,
   itemWidth,
-  renderItem 
+  renderItem,
 }: VirtualizedListProps<T> & { itemWidth: number }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollTop, setScrollTop] = useState(0);
@@ -64,19 +64,9 @@ const VirtualizedList = <T,>({
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className={styles.container}
-      onScroll={onScroll}
-    >
-      <div
-        className={styles.inner}
-        style={{ height: `${totalRows * rowHeight}px` }}
-      >
-        <div
-          className={styles.visibleRow}
-          style={{ top: `${visibleRowStart * rowHeight}px` }}
-        >
+    <div ref={containerRef} className={styles.container} onScroll={onScroll}>
+      <div className={styles.inner} style={{ height: `${totalRows * rowHeight}px` }}>
+        <div className={styles.visibleRow} style={{ top: `${visibleRowStart * rowHeight}px` }}>
           {visibleItems.map((item, index) => (
             <div
               key={(item as any).Name || index}
