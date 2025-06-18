@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { CategoryItemProps } from '../../../types/libraryTypes';
 import styles from './CategoryItem.module.css';
 import clsx from 'clsx';
 
-const CategoryItem: React.FC<CategoryItemProps> = React.memo(({ 
+const CategoryItem: FC<CategoryItemProps> = React.memo(({ 
   category, 
   isSelected, 
   onSelect 

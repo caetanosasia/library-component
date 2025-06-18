@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, FC } from 'react';
 import { Library } from './data/libraryData';
 import { LibraryData } from './types/libraryTypes';
 import CategoryPanel from './components/CategoryPanel/CategoryPanel';
@@ -6,7 +6,7 @@ import ComponentPanel from './components/ComponentPanel/ComponentPanel';
 import SearchInput from './components/SearchInput/SearchInput';
 
 
-const LibraryComponent: React.FC<{ initialData: LibraryData }> = ({ initialData }) => {
+const LibraryComponent: FC<{ initialData: LibraryData }> = ({ initialData }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 

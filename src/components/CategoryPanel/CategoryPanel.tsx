@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import { CategoryPanelProps } from '../../types/libraryTypes';
 import CategoryItem from './CategoryItem/CategoryItem';
 import styles from './CategoryPanel.module.css';
 
-const CategoryPanel: React.FC<CategoryPanelProps> = ({
+const CategoryPanel: FC<CategoryPanelProps> = ({
   categories,
   selectedCategory,
   onCategorySelect,

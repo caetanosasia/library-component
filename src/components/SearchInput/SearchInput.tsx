@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 
 interface SearchInputProps {
   value: string;
@@ -6,7 +6,7 @@ interface SearchInputProps {
   placeholder?: string;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ 
+const SearchInput: FC<SearchInputProps> = ({ 
   value, 
   onChange, 
   placeholder 

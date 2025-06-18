@@ -1,8 +1,8 @@
-import React from 'react';
+import { FC } from 'react';
 import { ComponentPanelProps } from '../../types/libraryTypes';
 import ComponentList from './ComponentList/ComponentList';
 
-const ComponentPanel: React.FC<ComponentPanelProps> = ({
+const ComponentPanel: FC<ComponentPanelProps> = ({
   selectedCategory,
   components
 }) => {

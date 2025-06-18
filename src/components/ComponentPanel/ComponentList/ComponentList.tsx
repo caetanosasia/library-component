@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Component } from '../../../types/libraryTypes';
 import { ComponentItem } from '../ComponentItem/ComponentItem';
 import VirtualizedList from '../VirtualizedList/VirtualizedList';
@@ -8,7 +8,7 @@ interface ComponentListProps {
   components: Component[];
 }
 
-const ComponentList: React.FC<ComponentListProps> = ({ components }) => {
+const ComponentList: FC<ComponentListProps> = ({ components }) => {
   if (components.length > 100) {
     return (
       <div className={styles.virtualizedWrapper}>
