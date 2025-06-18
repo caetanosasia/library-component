@@ -1,0 +1,13 @@
+.item {
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+}
+
+.selected {
+  background-color: #6b95e9;
+}
+
+.count {
+  margin-left: 5px;
+}

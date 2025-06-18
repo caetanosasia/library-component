@@ -72,7 +72,7 @@ const LibraryComponent: React.FC<{ initialData: LibraryData }> = ({ initialData 
   }, [filteredComponents, selectedCategory]);
 
   return (
-    <div style={{ padding: '16px', fontFamily: 'Arial, sans-serif', boxSizing: 'border-box' }}>
+    <div style={{ padding: '16px', fontFamily: 'Arial, sans-serif', boxSizing: 'border-box', height: '100vh' }}>
       <h1>Library</h1>
       <SearchInput 
         value={searchTerm}

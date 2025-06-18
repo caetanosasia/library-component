@@ -1,0 +1,22 @@
+.container {
+  height: 500px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.inner {
+  position: relative;
+}
+
+.visibleRow {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  border: 1px solid #c4c4c4;
+  margin: 0 4px 4px 0;
+  box-sizing: border-box;
+}

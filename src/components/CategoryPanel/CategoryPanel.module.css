@@ -1,0 +1,14 @@
+.panel {
+  padding: 16px 16px 0 0;
+  width: 200px;
+  overflow-y: auto;
+}
+
+.title {
+  margin-bottom: 8px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}

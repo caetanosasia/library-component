@@ -29,4 +29,4 @@ export const Library: LibraryData = {
   Categories: ["Controls", "Inputs", "Layout", "Custom", "Charts"],
 };
 
-addBigData(30, 10000);
+addBigData(30, 1600);

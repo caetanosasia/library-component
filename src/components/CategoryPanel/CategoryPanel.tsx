@@ -1,6 +1,7 @@
 import React from 'react';
 import { CategoryPanelProps } from '../../types/libraryTypes';
-import CategoryItem from './CategoryItem';
+import CategoryItem from './CategoryItem/CategoryItem';
+import styles from './CategoryPanel.module.css';
 
 const CategoryPanel: React.FC<CategoryPanelProps> = ({
   categories,
@@ -8,15 +9,9 @@ const CategoryPanel: React.FC<CategoryPanelProps> = ({
   onCategorySelect,
 }) => {
   return (
-    <div style={{ 
-      padding: '16px 16px 0 0',
-      width: '200px',
-      overflowY: 'auto'
-    }}>
-
-      
-      <h2>Categories</h2>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+    <div className={styles.panel}>
+      <h2 className={styles.title}>Categories</h2>
+      <ul className={styles.list}>
         {categories.map(category => (
           <CategoryItem
             key={category.name}

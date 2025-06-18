@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentPanelProps } from '../../types/libraryTypes';
-import ComponentList from './ComponentList';
+import ComponentList from './ComponentList/ComponentList';
 
 const ComponentPanel: React.FC<ComponentPanelProps> = ({
   selectedCategory,

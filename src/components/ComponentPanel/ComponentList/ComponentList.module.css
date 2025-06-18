@@ -1,0 +1,18 @@
+.virtualizedWrapper {
+  height: 500px;
+  overflow-y: auto;
+}
+
+.staticList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.staticItem {
+  padding: 8px;
+  border: 1px solid #c4c4c4;
+  margin: 0 4px 4px 0;
+  min-width: 75px;
+}
